@@ -1,6 +1,7 @@
 package socketio
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"reflect"
@@ -117,8 +118,8 @@ func newNamespaceConn(conn *conn, namespace string, broadcast Broadcast) *namesp
 	return ns
 }
 
-func (c *namespaceConn) SetContext(v interface{}) {
-	c.context = v
+func (c *namespaceConn) SetContext(ctx context.Context) {
+	c.context = ctx
 }
 
 func (c *namespaceConn) Context() interface{} {

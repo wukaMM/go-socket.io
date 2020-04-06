@@ -1,6 +1,7 @@
 package socketio
 
 import (
+	"context"
 	"net"
 	"net/http"
 	"net/url"
@@ -26,8 +27,8 @@ type Conn interface {
 	// connection, and share it between all handlers. The handlers
 	// is called in one goroutine, so no need to lock context if it
 	// only be accessed in one connection.
-	Context() interface{}
-	SetContext(v interface{})
+	Context() context.Context
+	SetContext(ctx context.Context)
 	Namespace() string
 	Emit(msg string, v ...interface{})
 
