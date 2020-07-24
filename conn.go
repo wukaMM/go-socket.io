@@ -6,7 +6,11 @@ import (
 	"net/http"
 	"net/url"
 	"reflect"
+<<<<<<< HEAD
 	"strings"
+=======
+    "strings"
+>>>>>>> ca3a4bf9c1d2f12feb15b92b344b8da153bb7e1f
 	"sync"
 
 	engineio "github.com/googollee/go-engine.io"
@@ -118,6 +122,7 @@ func (c *conn) connect() error {
 		return err
 	}
 
+<<<<<<< HEAD
 	if header.Namespace == "/" {
 		header.Namespace = ""
 	} else {
@@ -125,6 +130,14 @@ func (c *conn) connect() error {
 		header.Namespace = nsp
 	}
 	handler, ok := c.handlers[header.Namespace]
+=======
+    if header.Namespace == "/" {
+        header.Namespace = ""
+    } else {
+        nsp := strings.Split(header.Namespace, "?")[0]
+        header.Namespace = nsp
+    }
+>>>>>>> ca3a4bf9c1d2f12feb15b92b344b8da153bb7e1f
 
 	go c.serveError()
 	go c.serveWrite()
@@ -213,6 +226,7 @@ func (c *conn) serveRead() {
 			c.onError("", err)
 			return
 		}
+<<<<<<< HEAD
 		if header.Namespace == "/" {
 			header.Namespace = ""
 		} else {
@@ -220,6 +234,14 @@ func (c *conn) serveRead() {
 			header.Namespace = nsp
 		}
 
+=======
+        if header.Namespace == "/" {
+            header.Namespace = ""
+        } else {
+            nsp := strings.Split(header.Namespace, "?")[0]
+            header.Namespace = nsp
+        }
+>>>>>>> ca3a4bf9c1d2f12feb15b92b344b8da153bb7e1f
 		switch header.Type {
 		case parser.Ack:
 			conn, ok := c.namespaces[header.Namespace]
