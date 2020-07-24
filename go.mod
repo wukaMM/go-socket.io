@@ -9,4 +9,3 @@ require (
 	gopkg.in/yaml.v2 v2.2.4 // indirect
 )
 
-replace github.com/googollee/go-socket.io => github.com/wukaMM/go-socket.io v1.4.3
