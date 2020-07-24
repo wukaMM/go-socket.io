@@ -6,11 +6,12 @@ import (
 	"net/http"
 	"net/url"
 	"reflect"
+    "strings"
 	"sync"
 
 	engineio "github.com/googollee/go-engine.io"
 
-	"github.com/googollee/go-socket.io/parser"
+	"github.com/wukaMM/go-socket.io/parser"
 )
 
 // Conn is a connection in go-socket.io
@@ -111,7 +112,13 @@ func (c *conn) connect() error {
 	if err := c.encoder.Encode(header, nil); err != nil {
 		return err
 	}
-	handler, ok := c.handlers[header.Namespace]
+
+    if header.Namespace == "/" {
+        header.Namespace = ""
+    } else {
+        nsp := strings.Split(header.Namespace, "?")[0]
+        header.Namespace = nsp
+    }
 
 	go c.serveError()
 	go c.serveWrite()
@@ -200,9 +207,12 @@ func (c *conn) serveRead() {
 			c.onError("", err)
 			return
 		}
-		if header.Namespace == "/" {
-			header.Namespace = ""
-		}
+        if header.Namespace == "/" {
+            header.Namespace = ""
+        } else {
+            nsp := strings.Split(header.Namespace, "?")[0]
+            header.Namespace = nsp
+        }
 		switch header.Type {
 		case parser.Ack:
 			conn, ok := c.namespaces[header.Namespace]
