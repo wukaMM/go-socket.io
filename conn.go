@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"net/url"
 	"reflect"
-	"sync"
 	"strings"
+	"sync"
 
 	engineio "github.com/googollee/go-engine.io"
 
@@ -118,13 +118,13 @@ func (c *conn) connect() error {
 		return err
 	}
 
-    if header.Namespace == "/" {
-        header.Namespace = ""
-    } else {
-        nsp := strings.Split(header.Namespace, "?")[0]
-        header.Namespace = nsp
-    }
-    handler, ok := c.handlers[header.Namespace]
+	if header.Namespace == "/" {
+		header.Namespace = ""
+	} else {
+		nsp := strings.Split(header.Namespace, "?")[0]
+		header.Namespace = nsp
+	}
+	handler, ok := c.handlers[header.Namespace]
 
 	go c.serveError()
 	go c.serveWrite()
@@ -216,9 +216,9 @@ func (c *conn) serveRead() {
 		if header.Namespace == "/" {
 			header.Namespace = ""
 		} else {
-            nsp := strings.Split(header.Namespace, "?")[0]
-            header.Namespace = nsp
-        }
+			nsp := strings.Split(header.Namespace, "?")[0]
+			header.Namespace = nsp
+		}
 
 		switch header.Type {
 		case parser.Ack:

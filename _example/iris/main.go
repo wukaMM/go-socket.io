@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"log"
 
-	socketio "github.com/wukaMM/go-socket.io"
 	"github.com/kataras/iris/v12"
+	socketio "github.com/wukaMM/go-socket.io"
 )
 
 func main() {
